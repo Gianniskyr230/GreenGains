@@ -1,0 +1,147 @@
+/*
+ * GREEN GAINS — Premium White/Light Theme Design System
+ * Design Philosophy: Clean, sophisticated white background with forest green accents
+ * and golden highlights. Minimal, elegant, high-end aesthetic.
+ */
+
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+}
+
+:root {
+  --radius: 0.75rem;
+
+  /* Pure White Background for clarity */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.25 0.02 145);
+  
+  /* Solid Surface for Cards */
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.25 0.02 145);
+  
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.25 0.02 145);
+
+  /* Deep forest green primary (#1B7F3A) */
+  --primary: oklch(0.45 0.14 145);
+  --primary-foreground: oklch(0.99 0 0);
+
+  /* Warm gold secondary (#D4A574) */
+  --secondary: oklch(0.72 0.11 75);
+  --secondary-foreground: oklch(1 0 0);
+
+  --muted: oklch(0.97 0.01 145);
+  --muted-foreground: oklch(0.5 0.02 145);
+  
+  --accent: oklch(0.95 0.02 145);
+  --accent-foreground: oklch(0.45 0.14 145);
+  
+  --destructive: oklch(0.6 0.18 25);
+  --destructive-foreground: oklch(1 0 0);
+  
+  /* Substrate for borders */
+  --border: oklch(0.92 0.01 145);
+  --input: oklch(0.92 0.01 145);
+  --ring: oklch(0.45 0.14 145);
+}
+
+.dark {
+  --background: oklch(0.15 0.03 145);
+  --foreground: oklch(0.95 0.02 145);
+  --card: oklch(0.18 0.03 145);
+  --card-foreground: oklch(0.95 0.02 145);
+  --primary: oklch(0.75 0.15 145);
+  --primary-foreground: oklch(0.15 0.03 145);
+  --border: oklch(0.25 0.03 145);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}
+
+@layer components {
+  .container {
+    @apply w-full mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
+  }
+
+  /* * FIXED: Καθαρό Border χωρίς pseudo-elements 
+   * που προκαλούσαν θολούρα (blur)
+   */
+  .gradient-border {
+    @apply border border-border rounded-2xl relative bg-white;
+  }
+
+  /* * FIXED: Card Hover - Χρήση Shadow αντί για Glow 
+   * για πιο "κοφτερό" αποτέλεσμα
+   */
+  .card-hover {
+    @apply transition-all duration-300 ease-out 
+           hover:shadow-[0_20px_50px_rgba(27,127,58,0.1)] 
+           hover:border-primary/30 
+           hover:-translate-y-1;
+  }
+
+  /* Text gradients με σωστό rendering */
+  .text-gradient-green {
+    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-gradient-gold {
+    @apply bg-gradient-to-r from-secondary to-primary bg-clip-text text-transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Section divider με χαμηλό opacity για να μην "λάμπει" υπερβολικά */
+  .section-divider {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-border to-transparent;
+  }
+
+  /* Metrics & Data */
+  .font-mono-data {
+    @apply font-mono tracking-tight;
+  }
+
+  .font-display {
+    @apply font-sans tracking-tight antialiased;
+  }
+}
